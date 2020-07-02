@@ -1,0 +1,82 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 90).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Macbeth
+%This is a story about Macbeth, LadyMacbeth, Duncan and Macduff.
+exists macbeth Man(macbeth).
+exists ladymacbeth Woman(ladymacbeth).
+Lady(ladymacbeth).
+exists duncan Man(duncan).
+exists macduff Man(macduff).
+%Macbeth is an evil noble and LadyMacbeth is a greedy ambitous woman.
+Evil(macbeth) & Noble(macbeth).
+Greedy(ladymacbeth) & Ambitious(ladymacbeth).
+%Duncan is a king and Macduff is a noble.
+King(duncan) & Noble(macduff).
+%LadyMacbeth persuades Macbeth to want to be king because she is greedy.
+% Put another way ... Macbeth wants to be king because LadyMacbeth is greedy and is able to influence Macbeth
+(Greedy(ladymacbeth) & AbleToInfluence(ladymacbeth,macbeth)) -> WantsToBeKing(macbeth).
+%She is able to influence him because he is married to her and because he is weak.
+(Married(macbeth,ladymacbeth) & Weak(macbeth)) -> AbleToInfluence(ladymacbeth,macbeth).
+%Macbeth murders Duncan with a knife
+%Macbeth murders Duncan because Macbeth wants to be king, because Macbeth is evil, 
+% and because Duncan is king.
+(WantsToBeKing(macbeth) & Evil(macbeth) & King(duncan)) -> Murders(macbeth,duncan).
+%Then LadyMacbeth kills herself.
+Suicide(ladymacbeth).
+%Finally, Macduff gets angry and kills Macbeth because Macbeth murdered Duncan 
+% and because Macduff is loyal to Duncan.
+(Murders(macbeth,duncan) & Loyal(macduff, duncan)) -> Murders(macduff,macbeth).
+
+%Linda and Dick
+%This is a story about Linda and Dick.
+%Linda is a woman and Dick is a man.
+exists linda Woman(linda).
+exists dick Man(dick).
+%Dick is married to Linda.
+Married(dick,linda).
+%Dick is weak because he is tired.
+Tired(dick) -> Weak(dick).
+%He is tired because Linda is domineering.
+(Domineering(linda) & Married(dick,linda)) -> Tired(dick).
+
+%Need to provide world knowledge axioms to make proof: 
+linda = ladymacbeth.
+dick = macbeth.
+
+%Adam and Eve.
+%This is a story about Adam and Eve.
+exists adam Man(adam).
+exists eve Woman(eve).
+%Adam is greedy because Eve is foolish.
+Foolish(eve) -> Greedy(adam).
+%Adam wants to eat a forbidden apple because he is greedy.
+Greedy(adam) -> EatsForbiddenApple(adam).
+%God punishes Adam and Eve because Adam eats the forbidden apple.
+EatsForbiddenApple(adam) -> (GodPunishes(adam) & GodPunishes(eve)).
+
+end_of_list.
+
+formulas(goals).
+
+%Given a foolish noble and a domineering lady and that the noble is married to the lady
+%Show that the lady may persuade the noble to want to be king
+exists y exists z (
+                   (Man(y) & Noble(y) & Foolish(y) & Woman(z) & Lady(z) & Domineering(z) & Married(y,z))
+                   ->
+                   (AbleToInfluence(z,y) & WantsToBeKing(y))
+).
+
+end_of_list.
+

@@ -1,0 +1,322 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 2442 was started by shyloh on shyloh-laptop,
+Wed Nov 12 01:07:05 2014
+The command was "prover9 -f HW4_P1_Prover9.input".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file HW4_P1_Prover9.input
+
+set(ignore_option_dependencies).
+if(Prover9).
+% Conditional input included.
+assign(max_seconds,90).
+end_if.
+if(Mace4).
+% Conditional input omitted.
+end_if.
+
+formulas(assumptions).
+(exists macbeth Man(macbeth)).
+(exists ladymacbeth Woman(ladymacbeth)).
+Lady(ladymacbeth).
+(exists duncan Man(duncan)).
+(exists macduff Man(macduff)).
+Evil(macbeth) & Noble(macbeth).
+Greedy(ladymacbeth) & Ambitious(ladymacbeth).
+King(duncan) & Noble(macduff).
+Greedy(ladymacbeth) & AbleToInfluence(ladymacbeth,macbeth) -> WantsToBeKing(macbeth).
+Married(macbeth,ladymacbeth) & Weak(macbeth) -> AbleToInfluence(ladymacbeth,macbeth).
+WantsToBeKing(macbeth) & Evil(macbeth) & King(duncan) -> Murders(macbeth,duncan).
+Suicide(ladymacbeth).
+Murders(macbeth,duncan) & Loyal(macduff,duncan) -> Murders(macduff,macbeth).
+(exists linda Woman(linda)).
+(exists dick Man(dick)).
+Married(dick,linda).
+Tired(dick) -> Weak(dick).
+Domineering(linda) & Married(dick,linda) -> Tired(dick).
+linda = ladymacbeth.
+dick = macbeth.
+(exists adam Man(adam)).
+(exists eve Woman(eve)).
+Foolish(eve) -> Greedy(adam).
+Greedy(adam) -> EatsForbiddenApple(adam).
+EatsForbiddenApple(adam) -> GodPunishes(adam) & GodPunishes(eve).
+end_of_list.
+
+formulas(goals).
+(exists y exists z (Man(y) & Noble(y) & Foolish(y) & Woman(z) & Lady(z) & Domineering(z) & Married(y,z) -> AbleToInfluence(z,y) & WantsToBeKing(y))).
+end_of_list.
+
+============================== end of input ==========================
+
+% Enabling option dependencies (ignore applies only on input).
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 (exists macbeth Man(macbeth)) # label(non_clause).  [assumption].
+2 (exists ladymacbeth Woman(ladymacbeth)) # label(non_clause).  [assumption].
+3 (exists duncan Man(duncan)) # label(non_clause).  [assumption].
+4 (exists macduff Man(macduff)) # label(non_clause).  [assumption].
+5 Evil(macbeth) & Noble(macbeth) # label(non_clause).  [assumption].
+6 Greedy(ladymacbeth) & Ambitious(ladymacbeth) # label(non_clause).  [assumption].
+7 King(duncan) & Noble(macduff) # label(non_clause).  [assumption].
+8 Greedy(ladymacbeth) & AbleToInfluence(ladymacbeth,macbeth) -> WantsToBeKing(macbeth) # label(non_clause).  [assumption].
+9 Married(macbeth,ladymacbeth) & Weak(macbeth) -> AbleToInfluence(ladymacbeth,macbeth) # label(non_clause).  [assumption].
+10 WantsToBeKing(macbeth) & Evil(macbeth) & King(duncan) -> Murders(macbeth,duncan) # label(non_clause).  [assumption].
+11 Murders(macbeth,duncan) & Loyal(macduff,duncan) -> Murders(macduff,macbeth) # label(non_clause).  [assumption].
+12 (exists linda Woman(linda)) # label(non_clause).  [assumption].
+13 (exists dick Man(dick)) # label(non_clause).  [assumption].
+14 Tired(dick) -> Weak(dick) # label(non_clause).  [assumption].
+15 Domineering(linda) & Married(dick,linda) -> Tired(dick) # label(non_clause).  [assumption].
+16 (exists adam Man(adam)) # label(non_clause).  [assumption].
+17 (exists eve Woman(eve)) # label(non_clause).  [assumption].
+18 Foolish(eve) -> Greedy(adam) # label(non_clause).  [assumption].
+19 Greedy(adam) -> EatsForbiddenApple(adam) # label(non_clause).  [assumption].
+20 EatsForbiddenApple(adam) -> GodPunishes(adam) & GodPunishes(eve) # label(non_clause).  [assumption].
+21 (exists y exists z (Man(y) & Noble(y) & Foolish(y) & Woman(z) & Lady(z) & Domineering(z) & Married(y,z) -> AbleToInfluence(z,y) & WantsToBeKing(y))) # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+Man(c1).  [clausify(1)].
+Woman(c2).  [clausify(2)].
+Lady(ladymacbeth).  [assumption].
+Man(c3).  [clausify(3)].
+Man(c4).  [clausify(4)].
+Evil(macbeth).  [clausify(5)].
+Noble(macbeth).  [clausify(5)].
+Greedy(ladymacbeth).  [clausify(6)].
+Ambitious(ladymacbeth).  [clausify(6)].
+King(duncan).  [clausify(7)].
+Noble(macduff).  [clausify(7)].
+-Greedy(ladymacbeth) | -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [clausify(8)].
+-Married(macbeth,ladymacbeth) | -Weak(macbeth) | AbleToInfluence(ladymacbeth,macbeth).  [clausify(9)].
+-WantsToBeKing(macbeth) | -Evil(macbeth) | -King(duncan) | Murders(macbeth,duncan).  [clausify(10)].
+Suicide(ladymacbeth).  [assumption].
+-Murders(macbeth,duncan) | -Loyal(macduff,duncan) | Murders(macduff,macbeth).  [clausify(11)].
+Woman(c5).  [clausify(12)].
+Man(c6).  [clausify(13)].
+Married(dick,linda).  [assumption].
+-Tired(dick) | Weak(dick).  [clausify(14)].
+-Domineering(linda) | -Married(dick,linda) | Tired(dick).  [clausify(15)].
+linda = ladymacbeth.  [assumption].
+dick = macbeth.  [assumption].
+Man(c7).  [clausify(16)].
+Woman(c8).  [clausify(17)].
+-Foolish(eve) | Greedy(adam).  [clausify(18)].
+-Greedy(adam) | EatsForbiddenApple(adam).  [clausify(19)].
+-EatsForbiddenApple(adam) | GodPunishes(adam).  [clausify(20)].
+-EatsForbiddenApple(adam) | GodPunishes(eve).  [clausify(20)].
+Man(x).  [deny(21)].
+Noble(x).  [deny(21)].
+Foolish(x).  [deny(21)].
+Woman(x).  [deny(21)].
+Lady(x).  [deny(21)].
+Domineering(x).  [deny(21)].
+Married(x,y).  [deny(21)].
+-AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+Eliminating Man/1
+
+Eliminating Woman/1
+
+Eliminating Lady/1
+
+Eliminating Noble/1
+
+Eliminating Ambitious/1
+
+Eliminating Suicide/1
+
+Eliminating GodPunishes/1
+
+Eliminating EatsForbiddenApple/1
+
+============================== end predicate elimination =============
+
+Auto_denials:  (no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ =, Greedy, Domineering, Evil, Foolish, King, Tired, WantsToBeKing, Weak, Married, Murders, AbleToInfluence, Loyal ]).
+Function symbol precedence:  function_order([ macbeth, dick, ladymacbeth, duncan, linda, macduff, adam, eve ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(paramodulation).  % (positive equality literals)
+  % set(hyper_resolution).  % (nonunit Horn with equality)
+    % set(hyper_resolution) -> set(pos_hyper_resolution).
+  % set(neg_ur_resolution).  % (nonunit Horn with equality)
+  % assign(para_lit_limit, 4).  % (nonunit Horn with equality)
+
+Auto_process settings:
+  % set(unit_deletion).  % (Horn set with negative nonunits)
+
+kept:      22 Evil(macbeth).  [clausify(5)].
+kept:      23 Greedy(ladymacbeth).  [clausify(6)].
+kept:      24 King(duncan).  [clausify(7)].
+           25 -Greedy(ladymacbeth) | -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [clausify(8)].
+kept:      26 -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [copy(25),unit_del(a,23)].
+kept:      27 -Married(macbeth,ladymacbeth) | -Weak(macbeth) | AbleToInfluence(ladymacbeth,macbeth).  [clausify(9)].
+           28 -WantsToBeKing(macbeth) | -Evil(macbeth) | -King(duncan) | Murders(macbeth,duncan).  [clausify(10)].
+kept:      29 -WantsToBeKing(macbeth) | Murders(macbeth,duncan).  [copy(28),unit_del(b,22),unit_del(c,24)].
+kept:      30 -Murders(macbeth,duncan) | -Loyal(macduff,duncan) | Murders(macduff,macbeth).  [clausify(11)].
+kept:      31 Married(dick,linda).  [assumption].
+kept:      32 -Tired(dick) | Weak(dick).  [clausify(14)].
+           33 -Domineering(linda) | -Married(dick,linda) | Tired(dick).  [clausify(15)].
+kept:      34 -Domineering(linda) | Tired(dick).  [copy(33),unit_del(b,31)].
+kept:      35 linda = ladymacbeth.  [assumption].
+kept:      36 dick = macbeth.  [assumption].
+kept:      37 -Foolish(eve) | Greedy(adam).  [clausify(18)].
+kept:      38 Foolish(x).  [deny(21)].
+kept:      39 Domineering(x).  [deny(21)].
+kept:      40 Married(x,y).  [deny(21)].
+kept:      41 -AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+kept:      42 Tired(macbeth).  [back_rewrite(34),rewrite([35(1),36(3)]),unit_del(a,39)].
+kept:      43 Weak(macbeth).  [back_rewrite(32),rewrite([36(1),36(3)]),unit_del(a,42)].
+kept:      44 Greedy(adam).  [back_unit_del(37),unit_del(a,38)].
+kept:      45 AbleToInfluence(ladymacbeth,macbeth).  [back_unit_del(27),unit_del(a,40),unit_del(b,43)].
+kept:      46 WantsToBeKing(macbeth).  [back_unit_del(26),unit_del(a,45)].
+kept:      47 Murders(macbeth,duncan).  [back_unit_del(29),unit_del(a,46)].
+kept:      48 -Loyal(macduff,duncan) | Murders(macduff,macbeth).  [back_unit_del(30),unit_del(a,47)].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+22 Evil(macbeth).  [clausify(5)].
+23 Greedy(ladymacbeth).  [clausify(6)].
+24 King(duncan).  [clausify(7)].
+35 linda = ladymacbeth.  [assumption].
+36 dick = macbeth.  [assumption].
+38 Foolish(x).  [deny(21)].
+39 Domineering(x).  [deny(21)].
+40 Married(x,y).  [deny(21)].
+41 -AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+42 Tired(macbeth).  [back_rewrite(34),rewrite([35(1),36(3)]),unit_del(a,39)].
+43 Weak(macbeth).  [back_rewrite(32),rewrite([36(1),36(3)]),unit_del(a,42)].
+44 Greedy(adam).  [back_unit_del(37),unit_del(a,38)].
+45 AbleToInfluence(ladymacbeth,macbeth).  [back_unit_del(27),unit_del(a,40),unit_del(b,43)].
+46 WantsToBeKing(macbeth).  [back_unit_del(26),unit_del(a,45)].
+47 Murders(macbeth,duncan).  [back_unit_del(29),unit_del(a,46)].
+48 -Loyal(macduff,duncan) | Murders(macduff,macbeth).  [back_unit_del(30),unit_del(a,47)].
+end_of_list.
+
+formulas(demodulators).
+35 linda = ladymacbeth.  [assumption].
+36 dick = macbeth.  [assumption].
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.02 seconds.
+
+given #1 (I,wt=2): 22 Evil(macbeth).  [clausify(5)].
+
+given #2 (I,wt=2): 23 Greedy(ladymacbeth).  [clausify(6)].
+
+given #3 (I,wt=2): 24 King(duncan).  [clausify(7)].
+
+given #4 (I,wt=3): 35 linda = ladymacbeth.  [assumption].
+
+given #5 (I,wt=3): 36 dick = macbeth.  [assumption].
+
+given #6 (I,wt=2): 38 Foolish(x).  [deny(21)].
+
+given #7 (I,wt=2): 39 Domineering(x).  [deny(21)].
+
+given #8 (I,wt=3): 40 Married(x,y).  [deny(21)].
+
+given #9 (I,wt=5): 41 -AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+
+given #10 (I,wt=2): 42 Tired(macbeth).  [back_rewrite(34),rewrite([35(1),36(3)]),unit_del(a,39)].
+
+given #11 (I,wt=2): 43 Weak(macbeth).  [back_rewrite(32),rewrite([36(1),36(3)]),unit_del(a,42)].
+
+given #12 (I,wt=2): 44 Greedy(adam).  [back_unit_del(37),unit_del(a,38)].
+
+given #13 (I,wt=3): 45 AbleToInfluence(ladymacbeth,macbeth).  [back_unit_del(27),unit_del(a,40),unit_del(b,43)].
+
+============================== PROOF =================================
+
+% Proof 1 at 0.02 (+ 0.01) seconds.
+% Length of proof is 24.
+% Level of proof is 7.
+% Maximum clause weight is 8.000.
+% Given clauses 13.
+
+6 Greedy(ladymacbeth) & Ambitious(ladymacbeth) # label(non_clause).  [assumption].
+8 Greedy(ladymacbeth) & AbleToInfluence(ladymacbeth,macbeth) -> WantsToBeKing(macbeth) # label(non_clause).  [assumption].
+9 Married(macbeth,ladymacbeth) & Weak(macbeth) -> AbleToInfluence(ladymacbeth,macbeth) # label(non_clause).  [assumption].
+14 Tired(dick) -> Weak(dick) # label(non_clause).  [assumption].
+15 Domineering(linda) & Married(dick,linda) -> Tired(dick) # label(non_clause).  [assumption].
+21 (exists y exists z (Man(y) & Noble(y) & Foolish(y) & Woman(z) & Lady(z) & Domineering(z) & Married(y,z) -> AbleToInfluence(z,y) & WantsToBeKing(y))) # label(non_clause) # label(goal).  [goal].
+23 Greedy(ladymacbeth).  [clausify(6)].
+25 -Greedy(ladymacbeth) | -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [clausify(8)].
+26 -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [copy(25),unit_del(a,23)].
+27 -Married(macbeth,ladymacbeth) | -Weak(macbeth) | AbleToInfluence(ladymacbeth,macbeth).  [clausify(9)].
+31 Married(dick,linda).  [assumption].
+32 -Tired(dick) | Weak(dick).  [clausify(14)].
+33 -Domineering(linda) | -Married(dick,linda) | Tired(dick).  [clausify(15)].
+34 -Domineering(linda) | Tired(dick).  [copy(33),unit_del(b,31)].
+35 linda = ladymacbeth.  [assumption].
+36 dick = macbeth.  [assumption].
+39 Domineering(x).  [deny(21)].
+40 Married(x,y).  [deny(21)].
+41 -AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+42 Tired(macbeth).  [back_rewrite(34),rewrite([35(1),36(3)]),unit_del(a,39)].
+43 Weak(macbeth).  [back_rewrite(32),rewrite([36(1),36(3)]),unit_del(a,42)].
+45 AbleToInfluence(ladymacbeth,macbeth).  [back_unit_del(27),unit_del(a,40),unit_del(b,43)].
+46 WantsToBeKing(macbeth).  [back_unit_del(26),unit_del(a,45)].
+49 $F.  [ur(41,a,45,a),unit_del(a,46)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=13. Generated=28. Kept=24. proofs=1.
+Usable=13. Sos=3. Demods=2. Limbo=0, Disabled=45. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=3. Back_subsumed=0.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=2 (0 lex), Back_demodulated=3. Back_unit_deleted=5.
+Demod_attempts=80. Demod_rewrites=6.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=9.
+Megabytes=0.09.
+User_CPU=0.02, System_CPU=0.01, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+Exiting with 1 proof.
+
+Process 2442 exit (max_proofs) Wed Nov 12 01:07:05 2014

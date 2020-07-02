@@ -1,0 +1,45 @@
+============================== prooftrans ============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 1999 was started by shyloh on shyloh-laptop,
+Wed Nov 12 00:53:17 2014
+The command was "/usr/bin/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.02 (+ 0.01) seconds.
+% Length of proof is 24.
+% Level of proof is 7.
+% Maximum clause weight is 8.000.
+% Given clauses 13.
+
+
+6 Greedy(ladymacbeth) & Ambitious(ladymacbeth) # label(non_clause).  [assumption].
+8 Greedy(ladymacbeth) & AbleToInfluence(ladymacbeth,macbeth) -> WantsToBeKing(macbeth) # label(non_clause).  [assumption].
+9 Married(macbeth,ladymacbeth) & Weak(macbeth) -> AbleToInfluence(ladymacbeth,macbeth) # label(non_clause).  [assumption].
+14 Tired(dick) -> Weak(dick) # label(non_clause).  [assumption].
+15 Domineering(linda) & Married(dick,linda) -> Tired(dick) # label(non_clause).  [assumption].
+21 (exists x exists y (Man(x) & Noble(x) & Foolish(x) & Woman(y) & Lady(y) & Domineering(y) & Married(x,y) -> AbleToInfluence(y,x) & WantsToBeKing(x))) # label(non_clause) # label(goal).  [goal].
+23 Greedy(ladymacbeth).  [clausify(6)].
+25 -Greedy(ladymacbeth) | -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [clausify(8)].
+26 -AbleToInfluence(ladymacbeth,macbeth) | WantsToBeKing(macbeth).  [copy(25),unit_del(a,23)].
+27 -Married(macbeth,ladymacbeth) | -Weak(macbeth) | AbleToInfluence(ladymacbeth,macbeth).  [clausify(9)].
+31 Married(dick,linda).  [assumption].
+32 -Tired(dick) | Weak(dick).  [clausify(14)].
+33 -Domineering(linda) | -Married(dick,linda) | Tired(dick).  [clausify(15)].
+34 -Domineering(linda) | Tired(dick).  [copy(33),unit_del(b,31)].
+35 linda = ladymacbeth.  [assumption].
+36 dick = macbeth.  [assumption].
+39 Domineering(x).  [deny(21)].
+40 Married(x,y).  [deny(21)].
+41 -AbleToInfluence(x,y) | -WantsToBeKing(y).  [deny(21)].
+42 Tired(macbeth).  [back_rewrite(34),rewrite([35(1),36(3)]),unit_del(a,39)].
+43 Weak(macbeth).  [back_rewrite(32),rewrite([36(1),36(3)]),unit_del(a,42)].
+45 AbleToInfluence(ladymacbeth,macbeth).  [back_unit_del(27),unit_del(a,40),unit_del(b,43)].
+46 WantsToBeKing(macbeth).  [back_unit_del(26),unit_del(a,45)].
+49 $F.  [ur(41,a,45,a),unit_del(a,46)].
+
+============================== end of proof ==========================
